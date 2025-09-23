@@ -2,6 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: cursive;
 }
 
 .fundo_colorido1 {
@@ -41,6 +42,7 @@
                 outline: none;
                 border: none;
                 border-radius: 3vh;
+                color: #00033D;
             }
 
             button {
@@ -59,10 +61,13 @@
                 background-color: #977DFF;
                 transition: all 0.5s;
                 border: 0.3vh solid #977DFF;
+                color: white;
+                font-size: 2vh;
             }
 
             button:hover {
                 background-color: transparent;
+                color: black;
             }
 
             h4 {

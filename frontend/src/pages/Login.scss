@@ -26,16 +26,42 @@
                 display: flex;
                 flex-direction: column;
 
+                button {
+                    display: flex;
+                    align-self: center;
+                    background-color: #977DFF;
+                    outline: none;
+                    border: #977DFF solid 0.3vh;
+                    justify-content: center;
+                    width: 50%;
+                    height: 5vh;
+                    color: white;
+                    align-items: center;
+                    font-size: 2vh;
+                    cursor: pointer;
+                    transition: all 0.5s;
+                    border-radius: 5vh;
+                    margin-top: 5vh;
+                }
+
+                button:hover {
+                    background-color: transparent;
+                    color: black;
+                }
+
                 h3 {
                     font-size: 3.5vh;
+                    color: #0033FF;
                 }
 
                 h1 {
                     font-size: 7vh;
+                    color: #0600AB;
                 }
 
                 label {
                     font-size: 4vh;
+                    color: #00033D;
                 }
 
                 input {
@@ -47,27 +73,6 @@
                     border-radius: 3vh;
                 }
 
-            button {
-                display: flex;
-                align-self: center;
-                justify-self: center;
-                align-items: center;
-                justify-content: center;
-                width: 50%;
-                outline: none;
-                border: none;
-                height: 5vh;
-                border-radius: 3vh;
-                cursor: pointer;
-                margin-top: 2vh;
-                background-color: #977DFF;
-                transition: all 0.5s;
-                border: 0.3vh solid #977DFF;
-            }
-
-            button:hover {
-                background-color: transparent;
-            }
 
                 h4 {
                     display: flex;
@@ -79,6 +84,19 @@
                     text-decoration: none;
                     margin-left: 1vh;
                 }
+
+                .titulo {
+                    display: flex;
+                    flex-direction: column;
+                    padding-bottom: 5vh;
+                }
+
+                .cadastrar {
+                    display: flex;
+                    margin-top: 5vh;
+
+
+                }
             }
         }
 
@@ -88,7 +106,7 @@
             height: 100vh;
             justify-content: center;
             align-items: center;
-            background-color: blue;
+            background-color: #977DFF;
 
             img {
                 width: 50vh;

@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 import api from '../api.js';
 
 import { useState } from 'react'
@@ -9,6 +11,7 @@ export default function Registros() {
     const [data, setData] = useState('');
     const [registro, setRegistro] = useState('');
 
+    // sintaxe padrão para preenchimento de token automático
     async function LerRegistro() {
         try {
             const token = localStorage.getItem('token');
@@ -23,20 +26,57 @@ export default function Registros() {
         }
     }
 
+    if (content.length === 0) {
+        return (
+            <div className="fundo_colorido2">
+                <header>
+                    <Link to={'/'}>
+                        <div className="logo">
+                            <h1>My Sanctuary</h1>
+                        </div>
+                    </Link>
+                    <div className="perfil">
+                        <div className="pic" />
+                        <h1>Lucas Viana</h1>
+                    </div>
+                </header>
+                <div className='vazio'>
+                    <h1>Você não possui nenhum registro ainda...</h1>
+                    <button onClick={LerRegistro}>COMEÇAR</button>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="fundo_colorido2">
-            <div><h1>Você não possui nenhum registro ainda...</h1></div>
-            <button onClick={LerRegistro}>COMEÇAR</button>
-
-            {
-                content.map(registro => {
-                    return <div>
-                        <h1>{registro.titulo}</h1>
-                        <h2>{registro.data_registro}</h2>
-                        <h3>{registro.registro}</h3>
+            <header>
+                <Link to={'/'}>
+                    <div className="logo">
+                        <h1>My Sanctuary</h1>
                     </div>
-                })
-            }
+                </Link>
+                <div className="perfil">
+                    <div className="pic" />
+                    <h1>Lucas Viana</h1>
+                </div>
+            </header>
+
+            <div className="campo_notas">
+                {
+                    content.map(registro => {
+                        return <div className='notas'>
+                            <h1>{registro.titulo}</h1>
+                            <div className="image"></div>
+                            <h2>{registro.data_registro}</h2>
+                            <h3>{registro.registro}</h3>
+                        </div>
+                    })
+                }
+                <button onClick={LerRegistro}>COMEÇAR</button>
+            </div>
+
+
         </div>
     )
 }

@@ -39,18 +39,22 @@ export default function Login() {
             <div className="login">
                 <div className="lado_esquerdo">
                     <div className="caixa_invisivel_texto">
-                        <h3>Bem-vindo ao</h3>
-                        <h1>My Sanctuary</h1>
+                        <div className="titulo">
+                            <h3>Bem-vindo ao</h3>
+                            <h1>My Sanctuary</h1>
+                        </div>
                         <label>Email</label>
                         <input value={email} onChange={(e) => setEmail(e.target.value)} />
                         <label>Senha</label>
                         <input type='password' value={senha} onChange={(e) => setSenha(e.target.value)} />
                         <button onClick={VerificarLogin}>LOGIN</button>
-                        <h4>Não tem uma conta?
-                            <Link to={'/Cadastro'}>
-                                <span>Criar Agora.</span>
-                            </Link>
-                        </h4>
+                        <div className="cadastrar">
+                            <h4>Não tem uma conta?
+                                <Link to={'/Cadastro'}>
+                                    <span>Criar Agora.</span>
+                                </Link>
+                            </h4>
+                        </div>
                     </div>
                 </div>
                 <div className="lado_direito">
