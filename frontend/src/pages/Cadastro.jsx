@@ -18,14 +18,19 @@ export default function Cadastro() {
             alert('Erro ao Cadastrar')
         }
 
-        await api.post('cadastrar/usuario/' + apelido + '/' + email + '/' + senha, {
-            "apelido": apelido,
-            "email": email,
-            "senha": senha
-        })
-            .then(() => alert('Usuário Cadastrado!'))
-        navigate('/')
-            .catch(() => alert('Opa, deu ruim'))
+        try {
+            await api.post('cadastrar/usuario/' + apelido + '/' + email + '/' + senha, {
+                "apelido": apelido,
+                "email": email,
+                "senha": senha
+            })
+                .then(() => alert('Usuário Cadastrado!'))
+            navigate('/')
+                .catch(() => alert('Opa, deu ruim'))
+
+        } catch (err) {
+
+        }
     }
 
     return (

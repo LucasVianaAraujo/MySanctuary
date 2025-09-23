@@ -23,5 +23,46 @@ export async function CriarConta(apelido, email, senha) {
         user, email, senha
     ])
 
-    return {id: user};
+    const comando2 = `
+    INSERT INTO Registros (id_usuario)
+    VALUES
+    (?)
+    `
+
+    const [info2] = await connection.query(comando2, [
+        user
+    ])
+
+    return { id: user };
+}
+
+export async function VerificarLogin(email, senha) {
+    const comando = `
+    SELECT id_cadastro AS id, senha
+    FROM Cadastro
+    WHERE email = ?
+    AND senha = ?
+    LIMIT 1
+    `
+
+    const [rows] = await connection.query(comando, [
+        email, senha
+    ])
+
+    const [user] = rows;
+
+    return { id: user.id, email: user.email };
+}
+
+export async function ListarRegistros(id) {
+    const comando = `
+    SELECT titulo, data_registro, registro
+    FROM Registro_unico
+    INNER JOIN Registros ON Registro_unico.id_registro_unico = Registros.id_registro
+    WHERE Registros.id_usuario = ?;
+    `
+
+    const [info] = await connection.query(comando, [id])
+
+    return info;
 }
