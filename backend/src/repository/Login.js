@@ -83,3 +83,17 @@ export async function EnviarRegistro(titulo, data_registro, registro, id_usuario
 
     return info;
 }
+
+export async function BuscarInfo(usuario_id) {
+    const comando = `
+    SELECT cadastro.nome, login.email, login.senha
+    FROM cadastro
+    INNER JOIN login ON cadastro.id_cadastro = login.id_usuario
+    WHERE id_usuario = ?
+    `
+
+    const [info] = await connection.query(comando, [
+        usuario_id
+    ]);
+    return info;
+}

@@ -1,4 +1,4 @@
-import { CriarConta, VerificarLogin, ListarRegistros, EnviarRegistro } from '../repository/Login.js'
+import { CriarConta, VerificarLogin, ListarRegistros, EnviarRegistro, BuscarInfo } from '../repository/Login.js'
 
 import { getAuthentication } from '../utils/jwt.js';
 
@@ -47,6 +47,12 @@ endpoint.post('/EnviarRegistro', autenticar, async (req, resp) => {
     }
 
     const registro = await EnviarRegistro(titulo, data_registro, registros, id);
+    resp.send(registro);
+})
+
+endpoint.get('/BuscarCredenciais', autenticar, async (req, resp) => {
+    const usuario_id = req.user.id;
+    const registro = await BuscarInfo(usuario_id);
     resp.send(registro);
 })
 
