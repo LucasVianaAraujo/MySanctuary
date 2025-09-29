@@ -2,29 +2,32 @@ import { Link } from 'react-router';
 
 import api from '../api.js';
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Registros.scss'
 
 export default function Registros() {
+    const [userinfo, setUserInfo] = useState('');
     const [content, setContent] = useState([]);
-    const [titulo, setTitulo] = useState('');
-    const [data, setData] = useState('');
-    const [registro, setRegistro] = useState('');
 
-    // sintaxe padrão para preenchimento de token automático
     async function LerRegistro() {
         try {
             const token = localStorage.getItem('token');
+            console.log('Token recebido com sucesso, meu nobre!', token)
 
             const resp = await api.get('/mapear/registros', {
                 headers: { 'x-access-token': token }
             })
 
-            setContent(resp.data);
-        } catch (error) {
+            setUser(resp.data.nome);
+        } catch (err) {
             alert('Erro ao mapear registros')
+            console.log(err)
         }
     }
+
+    useEffect(() => {
+        LerRegistro()
+    }, []);
 
     if (content.length === 0) {
         return (
@@ -58,25 +61,24 @@ export default function Registros() {
                 </Link>
                 <div className="perfil">
                     <div className="pic" />
-                    <h1>Lucas Viana</h1>
+                    <h1>{resp.data.nome}</h1>
                 </div>
             </header>
 
             <div className="campo_notas">
+
                 {
-                    content.map(registro => {
-                        return <div className='notas'>
+                    content.map((registro, pos) => {
+                        return <div key={pos} className='notas'>
                             <h1>{registro.titulo}</h1>
                             <div className="image"></div>
-                            <h2>{registro.data_registro}</h2>
+                            <h2>{registro.data_registro.split("T")[0]}</h2>
                             <h3>{registro.registro}</h3>
                         </div>
                     })
                 }
-                <button onClick={LerRegistro}>COMEÇAR</button>
+
             </div>
-
-
         </div>
     )
 }

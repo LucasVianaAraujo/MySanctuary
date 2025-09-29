@@ -4,114 +4,96 @@
     margin: 0;
 }
 
-.fundo_colorido {
+.fundo-colorido {
     display: flex;
     flex-direction: column;
     background-color: #D9D9D9;
+    background-image: url('../assets/images/universo.jpg');
+    background-size: cover;
+    height: 100vh;
+    align-items: center;
+
+    .alinhador-topo {
+        display: flex;
+        position: fixed;
+        background-color: #a26ed3cc;
+        width: 100%;
+        justify-content: center;
+        height: 10vh;
+
+        .lado-esquerdo {
+            display: flex;
+            align-items: center;
+            width: 30%;
+            color: white;
+        }
+
+        .lado-direito {
+            display: flex;
+            color: white;
+            gap: 10vh;
+            justify-content: right;
+            flex-direction: row;
+            align-items: center;
+            width: 30%;
+        }
+    }
 
     .login {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 60%;
+        height: 100vh;
 
-        .lado_esquerdo {
+        .lado-esquerdo {
             display: flex;
             width: 50%;
             height: 100vh;
-            align-items: center;
             justify-content: center;
             flex-direction: column;
+            text-align: left;
+            color: white;
 
-            .caixa_invisivel_texto {
-                display: flex;
-                flex-direction: column;
+            h1 {
+                font-size: 6vh;
+            }
 
-                button {
-                    display: flex;
-                    align-self: center;
-                    background-color: #977DFF;
-                    outline: none;
-                    border: #977DFF solid 0.3vh;
-                    justify-content: center;
-                    width: 50%;
-                    height: 5vh;
-                    color: white;
-                    align-items: center;
-                    font-size: 2vh;
-                    cursor: pointer;
-                    transition: all 0.5s;
-                    border-radius: 5vh;
-                    margin-top: 5vh;
-                }
+            span {
+                color: #977DFF;
+            }
 
-                button:hover {
-                    background-color: transparent;
-                    color: black;
-                }
+            h3 {
+                font-size: 3.5vh;
+            }
 
-                h3 {
-                    font-size: 3.5vh;
-                    color: #0033FF;
-                }
-
-                h1 {
-                    font-size: 7vh;
-                    color: #0600AB;
-                }
-
-                label {
-                    font-size: 4vh;
-                    color: #00033D;
-                }
-
-                input {
-                    padding: 1vh;
-                    width: 100%;
-                    height: 5vh;
-                    outline: none;
-                    border: none;
-                    border-radius: 3vh;
-                }
-
-
-                h4 {
-                    display: flex;
-                    margin-top: 3vh;
-                    font-size: 2vh;
-                }
-
-                a {
-                    text-decoration: none;
-                    margin-left: 1vh;
-                }
-
-                .titulo {
-                    display: flex;
-                    flex-direction: column;
-                    padding-bottom: 5vh;
-                }
-
-                .cadastrar {
-                    display: flex;
-                    margin-top: 5vh;
-
-
-                }
+            h4 {
+                padding-top: 2vh;
+                font-size: 2.2vh;
+                text-align: justify;
             }
         }
 
-        .lado_direito {
+        .lado-direito {
             display: flex;
             width: 50%;
-            height: 100vh;
-            justify-content: center;
             align-items: center;
-            background-color: #977DFF;
+            justify-content: right;
+            height: 100vh;
 
-            img {
-                width: 50vh;
-                height: 50vh;
+            .caixa {
+                display: flex;
+                width: 70%;
+                height: 40%;
+                background-color: #b184d96e;
+                border-radius: 2vh;
+                align-items: center;
+                justify-content: center;
+                align-self: center;
+                justify-self: right;
+                flex-direction: column;
+                color: white;
             }
         }
     }
 }
+
+;

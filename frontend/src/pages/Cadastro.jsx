@@ -7,11 +7,11 @@ import { useState } from "react"
 import './Cadastro.scss'
 
 export default function Cadastro() {
+    const navigate = useNavigate(); // Sempre esqueço que o useNavigate fica dentro da função principal...
     const [apelido, setApelido] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    const navigate = useNavigate(); // Sempre esqueço que o useNavigate fica dentro da função principal...
 
     async function EnviarLogin() {
         if (!apelido || !email || !senha) {
@@ -24,12 +24,12 @@ export default function Cadastro() {
                 "email": email,
                 "senha": senha
             })
-                .then(() => alert('Usuário Cadastrado!'))
+            alert('Usuário Cadastrado!')
             navigate('/')
-                .catch(() => alert('Opa, deu ruim'))
 
         } catch (err) {
-
+            alert('Opa, deu ruim')
+            console.log(err);
         }
     }
 
@@ -42,7 +42,7 @@ export default function Cadastro() {
                     <label>Email</label>
                     <input value={email} onChange={(e) => setEmail(e.target.value)} />
                     <label>Senha</label>
-                    <input value={senha} onChange={(e) => setSenha(e.target.value)} />
+                    <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} />
                     <button onClick={EnviarLogin}>LOGIN</button>
                     <h4>Já possui cadastro?
                         <Link to={'/'}>

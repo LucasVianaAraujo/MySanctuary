@@ -51,18 +51,35 @@ export async function VerificarLogin(email, senha) {
 
     const [user] = rows;
 
-    return { id: user.id, email: user.email };
+    return user;
 }
 
-export async function ListarRegistros(id) {
+export async function ListarRegistros(id_usuario) {
     const comando = `
     SELECT titulo, data_registro, registro
     FROM Registro_unico
-    INNER JOIN Registros ON Registro_unico.id_registro_unico = Registros.id_registro
-    WHERE Registros.id_usuario = ?;
+    WHERE id_usuario = ?;
     `
 
-    const [info] = await connection.query(comando, [id])
+    const [info] = await connection.query(comando, [id_usuario])
+
+    return info;
+}
+
+export async function EnviarRegistro(titulo, data_registro, registro, id_usuario) {
+    const comando = `
+    INSERT INTO Registro_unico (id_registro, id_usuario, titulo, data_registro, registro)
+    VALUES
+    (?,?,?,?,?)
+    `
+
+    const [info] = await connection.query(comando, [
+        id_usuario,
+        id_usuario,
+        titulo,
+        data_registro,
+        registro
+    ])
 
     return info;
 }
