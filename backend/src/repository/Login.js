@@ -11,7 +11,7 @@ export async function CriarConta(apelido, email, senha) {
         apelido, email, senha
     ]);
 
-    const user = info.insertId;
+    const usuario = info.insertId;
 
     const comando1 = `
     INSERT INTO Login (id_cadastro, email, senha)
@@ -20,7 +20,7 @@ export async function CriarConta(apelido, email, senha) {
     `
 
     const [info1] = await connection.query(comando1, [
-        user, email, senha
+        usuario, email, senha
     ])
 
     const comando2 = `
@@ -30,28 +30,28 @@ export async function CriarConta(apelido, email, senha) {
     `
 
     const [info2] = await connection.query(comando2, [
-        user
+        usuario
     ])
 
-    return { id: user };
+    return { id: usuario };
 }
 
 export async function VerificarLogin(email, senha) {
     const comando = `
-    SELECT id_cadastro AS id, senha
+    SELECT id_cadastro AS id, nome, email
     FROM Cadastro
     WHERE email = ?
     AND senha = ?
     LIMIT 1
     `
 
-    const [rows] = await connection.query(comando, [
+    const [linhas] = await connection.query(comando, [
         email, senha
     ])
 
-    const [user] = rows;
+    const [usuario] = linhas;
 
-    return user;
+    return usuario;
 }
 
 export async function ListarRegistros(id_usuario) {
@@ -96,4 +96,16 @@ export async function BuscarInfo(usuario_id) {
         usuario_id
     ]);
     return info;
+}
+
+export async function DeletarRegistro(id_registro) {
+    const comando = `
+    DELETE FROM Registro_unico
+    WHERE id_registro_unico = ?
+    `
+
+    const [info] = await connection.query(comando, [
+        id_registro
+    ])
+    return info.affectedRows;
 }

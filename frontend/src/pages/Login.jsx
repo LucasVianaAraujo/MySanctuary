@@ -20,8 +20,8 @@ export default function Login() {
                 email, senha
             })
 
-            const token = resp.data.token;
-            const usuario = resp.data.usuario;
+            const token = resp.data.token; // aqui está puxando o token que foi gerado no backend da rota axios acima
+            const usuario = resp.data.usuario; // mesma coisa, aqui está puxando o id_usuario, diretamente relacionado com o token 
 
             if (!token) {
                 throw new Error("Token não recebido");
@@ -63,12 +63,15 @@ export default function Login() {
                 <div className="lado-direito">
                     <div className="caixa">
                         <h1>Login</h1>
-                        <label>Email</label>
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <label>Senha</label>
-                        <input type='password' value={senha} onChange={(e) => setSenha(e.target.value)} />
 
-                        <button onClick={VerificarLogin}>LOGIN</button>
+                        <div className="Login">
+                            <label>Email</label>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <label>Senha</label>
+                            <input type='password' value={senha} onChange={(e) => setSenha(e.target.value)} />
+                            <button>LOGIN</button>
+                        </div>
+
                         <div className="cadastrar">
                             <h4>Não tem uma conta?
                                 <Link to={'/Cadastro'}>

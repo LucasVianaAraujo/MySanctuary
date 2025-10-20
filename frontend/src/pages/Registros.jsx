@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { FaTrash } from "react-icons/fa";
+
 import api from '../api.js'
 
 import { useState, useEffect, use } from 'react'
@@ -19,12 +21,31 @@ export default function Registros() {
             })
 
             setContent(resp.data) // carrega tudo que eu escolhi pra ser exibido no renderizador
+        }
 
-        } 
-        
         catch (err) {
             alert('Erro ao mapear registros')
             console.log(err)
+        }
+    }
+
+    async function ExcluirRegistro(pos) {
+        try {
+            // para que isso funcione, eu vou precisar puxar o id na mesma função de apagar, dessa forma eu consigo puxar os dados e dps é só criar uma variável para o id, caso exista, e passar ele como parâmetro
+            const token = localStorage.getItem("token");
+            const posicao = pos + 1;
+
+            await api.delete(`/DeletarRegistro/${posicao}`, {
+                headers: { 'x-access-token': token }
+            })
+
+            content.splice(posicao, 1);
+            setContent([...content]);
+        }
+
+        catch (err) {
+            alert('Erro ao apagar registro!');
+            return;
         }
     }
 
@@ -78,7 +99,9 @@ export default function Registros() {
                 </header>
                 <div className='vazio'>
                     <h1>Você não possui nenhum registro ainda...</h1>
-                    <button onClick={LerRegistro}>COMEÇAR</button>
+                    <Link to={'/EnvioRegistro'}>
+                        <button onClick={LerRegistro}>COMEÇAR</button>
+                    </Link>
                 </div>
             </div>
         )
@@ -115,6 +138,7 @@ export default function Registros() {
                             <div className="image"></div>
                             <h2>{registro.data_registro.split("T")[0]}</h2>
                             <h3>{registro.registro}</h3>
+                            <button onClick={() => ExcluirRegistro(pos)}><FaTrash /></button>
                         </div>
                     })
                 }

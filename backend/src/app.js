@@ -10,4 +10,6 @@ api.use(cors());
 
 AdicionarRotas(api);
 
-api.listen(5001, ()=> console.log('Conectado ao MySQL'));
+const PORT = process.env.PORT || 5001;
+
+api.listen(PORT, () => console.log('Conectado ao MySQL'));

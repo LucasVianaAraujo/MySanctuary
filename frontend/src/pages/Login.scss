@@ -87,13 +87,174 @@
                 border-radius: 2vh;
                 align-items: center;
                 justify-content: center;
-                align-self: center;
-                justify-self: right;
                 flex-direction: column;
                 color: white;
+                padding: 2vh;
+
+                .Login {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    gap: 0.5vh;
+
+                    input {
+                        border: none;
+                        outline: none;
+                        padding: 1vh;
+                        width: 100%;
+                        height: 4vh;
+                        border-radius: 1vh;
+                    }
+
+                    button {
+                        display: flex;
+                        width: 100%;
+                        border: none;
+                        outline: none;
+                        align-items: center;
+                        justify-content: center;
+                        height: 4vh;
+                        background-color: #977DFF;
+                        border-radius: 1vh;
+                    }
+
+                    button:hover {
+                        cursor: pointer;
+                    }
+
+                }
             }
         }
     }
 }
 
-;
+@media screen and (max-width: 768px) {
+    .fundo-colorido {
+        display: flex;
+        flex-direction: column;
+        background-color: #D9D9D9;
+        background-image: url('../assets/images/universo.jpg');
+        background-size: cover;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+
+        .alinhador-topo {
+            display: none;
+            position: fixed;
+            background-color: #a26ed3cc;
+            width: 100%;
+            justify-content: center;
+            height: 10vh;
+
+            .lado-esquerdo {
+                display: flex;
+                align-items: center;
+                width: 30%;
+                color: white;
+            }
+
+            .lado-direito {
+                display: flex;
+                color: white;
+                gap: 10vh;
+                justify-content: right;
+                flex-direction: row;
+                align-items: center;
+                width: 30%;
+            }
+        }
+
+        .login {
+            display: flex;
+            width: 60%;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            justify-self: center;
+            align-items: center;
+
+            .lado-esquerdo {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
+                text-align: left;
+                color: white;
+
+                h1 {
+                    font-size: 6vh;
+                }
+
+                span {
+                    color: #977DFF;
+                }
+
+                h3 {
+                    font-size: 3.5vh;
+                }
+
+                h4 {
+                    padding-top: 2vh;
+                    font-size: 2.2vh;
+                    text-align: justify;
+                }
+            }
+
+            .lado-direito {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
+                height: 100vh;
+
+                .caixa {
+                    display: flex;
+                    width: 100%;
+                    height: 80%;
+                    background-color: #b184d96e;
+                    border-radius: 2vh;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    color: white;
+                    padding: 2vh;
+
+                    .Login {
+                        display: flex;
+                        width: 100%;
+                        flex-direction: column;
+                        gap: 0.5vh;
+
+                        input {
+                            border: none;
+                            outline: none;
+                            padding: 1vh;
+                            width: 100%;
+                            height: 4vh;
+                            border-radius: 1vh;
+                        }
+
+                        button {
+                            display: flex;
+                            width: 100%;
+                            border: none;
+                            outline: none;
+                            align-items: center;
+                            justify-content: center;
+                            height: 4vh;
+                            background-color: #977DFF;
+                            border-radius: 1vh;
+                        }
+
+                        button:hover {
+                            cursor: pointer;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
