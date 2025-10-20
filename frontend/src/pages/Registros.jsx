@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom';
-
 import { FaTrash } from "react-icons/fa";
-
 import api from '../api.js'
-
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import './Registros.scss'
 
 export default function Registros() {
     const [content, setContent] = useState([]);
-    const [user, setUserInfo] = useState([]);
+    const [nome, setNome] = useState('');
 
     async function LerRegistro() {
         try {
             const token = localStorage.getItem('token');
-            console.log('Token recebido com sucesso, meu nobre!', token) // verifica se o token foi recebido, sempre lembrar de tirar
+            // console.log('Token recebido com sucesso, meu nobre!', token) // verifica se o token foi recebido, sempre lembrar de tirar
 
             const resp = await api.get('/mapear/registros', { // endpoint só é carregado se o token for autorizado
                 headers: { 'x-access-token': token } // envia o token para o header automaticamente
@@ -29,18 +26,18 @@ export default function Registros() {
         }
     }
 
-    async function ExcluirRegistro(pos) {
+    async function ExcluirRegistro(id_registro_unico) {
         try {
             // para que isso funcione, eu vou precisar puxar o id na mesma função de apagar, dessa forma eu consigo puxar os dados e dps é só criar uma variável para o id, caso exista, e passar ele como parâmetro
             const token = localStorage.getItem("token");
-            const posicao = pos + 1;
 
-            await api.delete(`/DeletarRegistro/${posicao}`, {
+            await api.delete(`/DeletarRegistro/${id_registro_unico}`, {
                 headers: { 'x-access-token': token }
             })
 
-            content.splice(posicao, 1);
-            setContent([...content]);
+            const registros = content.filter(registro => registro.id_registro_unico !== id_registro_unico)
+
+            setContent(registros);
         }
 
         catch (err) {
@@ -62,8 +59,8 @@ export default function Registros() {
                 headers: { 'x-access-token': token }
             });
 
-            setUserInfo(resp.data);
-            console.log(resp.data);
+            // console.log(resp.data[0].nome);
+            setNome(resp.data[0].nome)
         }
 
         catch (err) {
@@ -86,15 +83,7 @@ export default function Registros() {
                     </Link>
                     <div className="perfil">
                         <div className="pic" />
-                        <h1>
-                            {
-                                user.map((cred, pos) => {
-                                    return <div key={pos}>
-                                        <h1>{cred.nome}</h1>
-                                    </div>
-                                })
-                            }
-                        </h1>
+                        <h1>{nome ? nome : 'Carregando...'}</h1>
                     </div>
                 </header>
                 <div className='vazio'>
@@ -117,15 +106,7 @@ export default function Registros() {
                 </Link>
                 <div className="perfil">
                     <div className="pic" />
-                    <h1>
-                        {
-                            user.map((cred, pos) => {
-                                return <div key={pos}>
-                                    <h1>{cred.nome}</h1>
-                                </div>
-                            })
-                        }
-                    </h1>
+                    <h1>{nome ? nome : 'Carregando...'}</h1>
                 </div>
             </header>
 
@@ -133,12 +114,14 @@ export default function Registros() {
 
                 {
                     content.map((registro, pos) => { // adicionar o pos é uma boa prática para checagem de posição do objeto
-                        return <div key={pos} className='notas'>
+                        return <div key={registro.id_registro_unico} className='notas'>
                             <h1>{registro.titulo}</h1>
                             <div className="image"></div>
                             <h2>{registro.data_registro.split("T")[0]}</h2>
                             <h3>{registro.registro}</h3>
-                            <button onClick={() => ExcluirRegistro(pos)}><FaTrash /></button>
+                            <button onClick={() => ExcluirRegistro(registro.id_registro_unico)}>
+                                <FaTrash />
+                            </button>
                         </div>
                     })
                 }

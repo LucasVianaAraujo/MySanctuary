@@ -56,7 +56,7 @@ export async function VerificarLogin(email, senha) {
 
 export async function ListarRegistros(id_usuario) {
     const comando = `
-    SELECT titulo, data_registro, registro
+    SELECT id_registro_unico, titulo, data_registro, registro
     FROM Registro_unico
     WHERE id_usuario = ?;
     `
@@ -100,7 +100,7 @@ export async function BuscarInfo(usuario_id) {
 
 export async function DeletarRegistro(id_registro) {
     const comando = `
-    DELETE FROM Registro_unico
+    DELETE FROM Registro_Unico
     WHERE id_registro_unico = ?
     `
 

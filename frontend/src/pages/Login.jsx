@@ -9,6 +9,12 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    function EnviarLogin(e) {
+        if (e.key === 'Enter') {
+            VerificarLogin()
+        }
+    }
+
     async function VerificarLogin() {
         if (!email || !senha) {
             alert('Email ou senha inválido')
@@ -16,21 +22,20 @@ export default function Login() {
         }
 
         try {
+            
             const resp = await axios.post('http://localhost:5001/login/usuario', {
                 email, senha
             })
-
+            
             const token = resp.data.token; // aqui está puxando o token que foi gerado no backend da rota axios acima
             const usuario = resp.data.usuario; // mesma coisa, aqui está puxando o id_usuario, diretamente relacionado com o token 
-
+            
             if (!token) {
-                throw new Error("Token não recebido");
+                console.log('Token não recebido')
             }
 
             localStorage.setItem("token", token);
-            if (usuario) {
-                localStorage.setItem("usuario", JSON.stringify(usuario))
-            }
+            localStorage.setItem("usuario", JSON.stringify(usuario))
 
             alert('Usuário Encontrado!')
             navigate('/Registro')
@@ -66,10 +71,10 @@ export default function Login() {
 
                         <div className="Login">
                             <label>Email</label>
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input value={email} onKeyUp={EnviarLogin} onChange={(e) => setEmail(e.target.value)} />
                             <label>Senha</label>
-                            <input type='password' value={senha} onChange={(e) => setSenha(e.target.value)} />
-                            <button>LOGIN</button>
+                            <input type='password' onKeyUp={EnviarLogin} value={senha} onChange={(e) => setSenha(e.target.value)} />
+                            <button onClick={VerificarLogin}>LOGIN</button>
                         </div>
 
                         <div className="cadastrar">

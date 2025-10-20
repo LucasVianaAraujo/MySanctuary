@@ -23,6 +23,7 @@ export default function Cadastro() {
                 "email": email,
                 "senha": senha
             })
+
             alert('Usuário Cadastrado!')
             navigate('/')
 
@@ -32,30 +33,18 @@ export default function Cadastro() {
         }
     }
 
-    function AlterouValor(e) {
-        let NovoValor = e.target.checked;
-        alert('Novo valor: ' + NovoValor);
-    }
-
     return (
         <div className="fundo_colorido1">
             <div className="cadastro">
                 <div className="caixa_invisivel_texto">
                     <label>Apelido</label>
 
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        EnviarLogin()
-                    }}>
-                        <input value={apelido} onChange={(e) => setApelido(e.target.value)} />
-                        <label>Email</label>
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <label>Senha</label>
-                        <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} />
-                        <button>LOGIN</button>
-                    </form>
-
-                    <input type="checkbox" onChange={AlterouValor}/>
+                    <input value={apelido} onChange={(e) => setApelido(e.target.value)} />
+                    <label>Email</label>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <label>Senha</label>
+                    <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} />
+                    <button onClick={EnviarLogin}>LOGIN</button>
 
                     <h4>Já possui cadastro?
                         <Link to={'/'}>
